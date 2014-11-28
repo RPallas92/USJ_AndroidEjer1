@@ -4,15 +4,37 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 
 public class LoginActivity extends Activity {
+
+    TextView userText;
+    TextView passwordText;
+    Button enterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        userText = (TextView) findViewById(R.id.loginUserText);
+        passwordText = (TextView) findViewById(R.id.loginPasswordText);
+
+        enterButton = (Button) findViewById(R.id.loginEnterButton);
+        enterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userText.equals(Ejercico1Application.USER) && passwordText.equals(Ejercico1Application.PASSWORD)){
+                    
+                }
+            }
+        });
     }
+
+
 
 
     @Override
