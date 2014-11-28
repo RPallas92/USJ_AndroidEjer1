@@ -1,0 +1,118 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="es.rpallas.usjandroidejer1.DepositoActivity">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Depositante"
+        android:id="@+id/depositoDepositanteTextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/depositoCIFEditText"
+        android:layout_below="@+id/depositoDepositanteTextView"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="41dp"
+        android:layout_height="40dp"
+        android:id="@+id/depositoMaterialImage"
+        android:layout_below="@+id/depositoCIFEditText"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/material_informatico" />
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Material informáticos"
+        android:id="@+id/depositoMaterialCheck"
+        android:layout_alignBottom="@+id/depositoMaterialImage"
+        android:layout_toEndOf="@+id/depositoMaterialImage"
+        android:checked="false" />
+
+    <ImageView
+        android:layout_width="41dp"
+        android:layout_height="40dp"
+        android:id="@+id/depositoNeveraImage"
+        android:src="@drawable/neveras"
+        android:layout_below="@+id/depositoMaterialImage"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Neveras"
+        android:id="@+id/depositoNeveraCheck"
+        android:layout_toEndOf="@+id/depositoNeveraImage"
+        android:checked="false"
+        android:layout_alignBottom="@+id/depositoNeveraImage" />
+
+    <ImageView
+        android:layout_width="41dp"
+        android:layout_height="40dp"
+        android:id="@+id/depositoAceiteImage"
+        android:src="@drawable/aceites_usados"
+        android:layout_below="@+id/depositoNeveraCheck"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aceites usados"
+        android:id="@+id/depositoAceiteCheck"
+        android:layout_toEndOf="@+id/depositoMaterialImage"
+        android:checked="false"
+        android:layout_alignBottom="@+id/depositoAceiteImage"
+        android:layout_alignStart="@+id/depositoNeveraCheck" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Peso total:"
+        android:id="@+id/depositoPesoText"
+        android:layout_below="@+id/depositoAceiteImage"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="39dp" />
+
+    <EditText
+        android:layout_marginLeft="40dp"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/depositoKiloEditText"
+        android:layout_toEndOf="@+id/depositoPesoText"
+        android:layout_alignBottom="@+id/depositoPesoText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kg."
+        android:layout_marginLeft="4dp"
+        android:id="@+id/depositoKgText"
+        android:layout_toRightOf="@id/depositoKiloEditText"
+        android:layout_toEndOf="@+id/depositoDepositanteTextView"
+        android:layout_alignBottom="@+id/depositoKiloEditText" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Depositar"
+        android:id="@+id/depositoDepositarButton"
+        android:layout_below="@+id/depositoKiloEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp" />
+</RelativeLayout>
