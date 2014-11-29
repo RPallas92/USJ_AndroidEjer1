@@ -4,14 +4,81 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import es.rpallas.usjandroidejer1.model.PersonaJuridica;
 
 
 public class ResultadosActivity extends Activity {
+
+    private TextView depositante;
+    private TextView material;
+    private TextView nevera;
+    private TextView aceites;
+    private TextView kilos;
+    private TextView kilosCoste;
+    private TextView ivaCoste;
+    private TextView totalCoste;
+    private TextView numeroResiduos;
+
+    private Button email;
+    private Button registrar;
+
+    private RelativeLayout costeLayout;
+
+    private int cantidadResiduos = 3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados);
+
+        depositante = (TextView) findViewById(R.id.resultadoCIFText);
+        material = (TextView) findViewById(R.id.resultadoMaterialInformaticoText);
+        nevera = (TextView) findViewById(R.id.resultadoNeverasText);
+        aceites = (TextView) findViewById(R.id.resultadosAceiteText);
+        kilos = (TextView) findViewById(R.id.resultadosKgText);
+        kilosCoste = (TextView) findViewById(R.id.resultadosPrecioText);
+        ivaCoste = (TextView) findViewById(R.id.resultadoCosteIVAText);
+        totalCoste = (TextView) findViewById(R.id.resultadoPrecioTotalText);
+        numeroResiduos = (TextView) findViewById(R.id.resultadoNumeroText);
+
+        costeLayout = (RelativeLayout) findViewById(R.id.resultadoCosteRLayout);
+
+        depositante.setText(Ejercico1Application.PERSONA.getId());
+
+        if(!Ejercico1Application.isMaterialChecked){
+            material.setVisibility(View.GONE);
+            cantidadResiduos--;
+        }
+        if(!Ejercico1Application.isAceitesChecked){
+            aceites.setVisibility(View.GONE);
+            cantidadResiduos--;
+        }
+        if(!Ejercico1Application.isNeverasChecked){
+            nevera.setVisibility(View.GONE);
+            cantidadResiduos--;
+        }
+        numeroResiduos.setText(cantidadResiduos + " " +numeroResiduos.getText().toString());
+
+        if(!(Ejercico1Application.PERSONA instanceof PersonaJuridica)){
+            costeLayout.setVisibility(View.GONE);
+        }
+        else {
+            kilos.setText(Ejercico1Application.kilos + " " + kilos.getText().toString());
+            double precioSinIVA = ((double)Ejercico1Application.kilos)*2.5;
+            double IVA = ((double)Ejercico1Application.kilos)*2.5*0.20;
+            double precioTotal = precioSinIVA + IVA;
+            kilosCoste.setText(precioSinIVA+"");
+            ivaCoste.setText(IVA+"");
+            totalCoste.setText(precioTotal+"");
+        }
     }
 
 

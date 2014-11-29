@@ -1,9 +1,11 @@
 package es.rpallas.usjandroidejer1;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -20,7 +22,6 @@ public class DepositoActivity extends Activity {
     private CheckBox aceites;
     private EditText peso;
     private Button depositar;
-
 
 
     @Override
@@ -44,7 +45,7 @@ public class DepositoActivity extends Activity {
         CompoundButton.OnCheckedChangeListener checkListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(materiales.isChecked() || neveras.isChecked() || aceites.isChecked()){
+                if (materiales.isChecked() || neveras.isChecked() || aceites.isChecked()) {
                     peso.setEnabled(true);
                     depositar.setEnabled(true);
                 } else {
@@ -62,8 +63,34 @@ public class DepositoActivity extends Activity {
 
     }
 
-    private void configDepositarButton(){
-        //TODO Guardar kilos y cuantos hay checkeados con 3 boolean y un int
+    private void configDepositarButton() {
+
+        depositar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (materiales.isChecked()) {
+                    Ejercico1Application.isMaterialChecked = true;
+                }
+                else {
+                    Ejercico1Application.isMaterialChecked = false;
+                }
+                if (neveras.isChecked()) {
+                    Ejercico1Application.isNeverasChecked = true;
+                } else {
+                    Ejercico1Application.isNeverasChecked = false;
+                }
+                if (aceites.isChecked()) {
+                    Ejercico1Application.isAceitesChecked = true;
+                } else {
+                    Ejercico1Application.isAceitesChecked = false;
+                }
+
+                Ejercico1Application.kilos = Integer.parseInt(peso.getText().toString());
+
+                Intent lanzarResultadosActivity = new Intent(DepositoActivity.this, ResultadosActivity.class);
+                startActivity(lanzarResultadosActivity);
+            }
+        });
     }
 
 
