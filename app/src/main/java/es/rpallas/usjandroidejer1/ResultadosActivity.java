@@ -1,6 +1,8 @@
 package es.rpallas.usjandroidejer1;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,6 +53,9 @@ public class ResultadosActivity extends Activity {
 
         costeLayout = (RelativeLayout) findViewById(R.id.resultadoCosteRLayout);
 
+        email = (Button) findViewById(R.id.resultadoMailButton);
+        registrar = (Button) findViewById(R.id.resultadoRegistrarButton);
+
         depositante.setText(Ejercico1Application.PERSONA.getId());
 
         if(!Ejercico1Application.isMaterialChecked){
@@ -75,10 +80,30 @@ public class ResultadosActivity extends Activity {
             double precioSinIVA = ((double)Ejercico1Application.kilos)*2.5;
             double IVA = ((double)Ejercico1Application.kilos)*2.5*0.20;
             double precioTotal = precioSinIVA + IVA;
-            kilosCoste.setText(precioSinIVA+"");
-            ivaCoste.setText(IVA+"");
-            totalCoste.setText(precioTotal+"");
+            kilosCoste.setText(precioSinIVA+"€");
+            ivaCoste.setText(IVA+"€");
+            totalCoste.setText(precioTotal+"€");
         }
+
+        registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent lanzarLoginActivity = new Intent(ResultadosActivity.this, LoginActivity.class);
+                lanzarLoginActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                        Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(lanzarLoginActivity);
+            }
+        });
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, "Nuevo depósito realizado por la persona "+ Ejercico1Application.PERSONA.getId());
+                intent.setType("message/rfc822");
+                Intent mailer = Intent.createChooser(intent, null);
+                startActivity(mailer);
+            }
+        });
     }
 
 
