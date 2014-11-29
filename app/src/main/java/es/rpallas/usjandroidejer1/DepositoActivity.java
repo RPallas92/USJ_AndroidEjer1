@@ -4,14 +4,66 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+
+import java.util.zip.CheckedOutputStream;
 
 
 public class DepositoActivity extends Activity {
+
+    private EditText depositante;
+    private CheckBox materiales;
+    private CheckBox neveras;
+    private CheckBox aceites;
+    private EditText peso;
+    private Button depositar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deposito);
+
+        depositante = (EditText) findViewById(R.id.depositoCIFEditText);
+        materiales = (CheckBox) findViewById(R.id.depositoMaterialCheck);
+        neveras = (CheckBox) findViewById(R.id.depositoNeveraCheck);
+        aceites = (CheckBox) findViewById(R.id.depositoAceiteCheck);
+        peso = (EditText) findViewById(R.id.depositoKiloEditText);
+        depositar = (Button) findViewById(R.id.depositoDepositarButton);
+
+        depositante.setText(Ejercico1Application.PERSONA.getId());
+        depositante.setEnabled(false);
+
+        peso.setEnabled(false);
+        depositar.setEnabled(false);
+
+        CompoundButton.OnCheckedChangeListener checkListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(materiales.isChecked() || neveras.isChecked() || aceites.isChecked()){
+                    peso.setEnabled(true);
+                    depositar.setEnabled(true);
+                } else {
+                    peso.setEnabled(false);
+                    depositar.setEnabled(false);
+                }
+            }
+        };
+
+        materiales.setOnCheckedChangeListener(checkListener);
+        neveras.setOnCheckedChangeListener(checkListener);
+        aceites.setOnCheckedChangeListener(checkListener);
+
+        configDepositarButton();
+
+    }
+
+    private void configDepositarButton(){
+        //TODO Guardar kilos y cuantos hay checkeados con 3 boolean y un int
     }
 
 

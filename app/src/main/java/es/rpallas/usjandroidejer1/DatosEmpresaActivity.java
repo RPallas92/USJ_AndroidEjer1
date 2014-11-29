@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import java.util.regex.Pattern;
 
+import es.rpallas.usjandroidejer1.model.PersonaJuridica;
+
 
 public class DatosEmpresaActivity extends Activity {
 
@@ -155,9 +157,15 @@ public class DatosEmpresaActivity extends Activity {
                         Patterns.EMAIL_ADDRESS.matcher(emailEditText.getText().toString()).matches() &&
                         Patterns.WEB_URL.matcher(urlEditText.getText().toString()).matches() ){
 
-                    //TODO Crear la empresa
-                    //TODO lanzar la activity
-
+                    if(Ejercico1Application.PERSONA instanceof PersonaJuridica){
+                        PersonaJuridica empresa = (PersonaJuridica) Ejercico1Application.PERSONA;
+                        empresa.setEmail(emailEditText.getText().toString());
+                        empresa.setNombre(nombreEditText.getText().toString());
+                        empresa.setTelefono(telefonoEditText.getText().toString());
+                        empresa.setWeb(urlEditText.getText().toString());
+                    }
+                    Intent lanzarDepositoActivity = new Intent(DatosEmpresaActivity.this, DepositoActivity.class);
+                    startActivity(lanzarDepositoActivity);
                 }
                 else {
                     Toast.makeText(DatosEmpresaActivity.this, "Datos incorrectos", Toast.LENGTH_SHORT).show();
