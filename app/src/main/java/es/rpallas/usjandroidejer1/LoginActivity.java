@@ -1,6 +1,7 @@
 package es.rpallas.usjandroidejer1;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +29,8 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (userText.equals(Ejercico1Application.USER) && passwordText.equals(Ejercico1Application.PASSWORD)){
-                    
+                    Intent lanzaCIFActivity = new Intent(LoginActivity.this, CIFActivity.class);
+                    startActivity(lanzaCIFActivity);
                 }
             }
         });
