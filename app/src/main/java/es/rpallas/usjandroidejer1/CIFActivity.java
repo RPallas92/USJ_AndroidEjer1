@@ -1,6 +1,7 @@
 package es.rpallas.usjandroidejer1;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import es.rpallas.usjandroidejer1.model.Persona;
+import es.rpallas.usjandroidejer1.model.PersonaJuridica;
 
 
 public class CIFActivity extends Activity {
@@ -98,6 +102,21 @@ public class CIFActivity extends Activity {
 
         cifEditText.addTextChangedListener(textoHaCambiado);
         dniEditText.addTextChangedListener(textoHaCambiado);
+
+        inciarDeposito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (esEmpresa){
+                    Ejercico1Application.PERSONA = new PersonaJuridica(cifEditText.getText().toString());
+                    Intent irPantallaDatosEmpresa = new Intent(CIFActivity.this, DatosEmpresaActivity.class);
+                    startActivity(irPantallaDatosEmpresa);
+                } else {
+                    Ejercico1Application.PERSONA = new Persona(dniEditText.getText().toString());
+                    Intent irPantallaDeposito = new Intent(CIFActivity.this, DepositoActivity.class);
+                    startActivity(irPantallaDeposito);
+                }
+            }
+        });
 
     }
 

@@ -63,6 +63,7 @@ public class LoginActivity extends Activity {
 
         userText.addTextChangedListener(textoHaCambiado);
         passwordText.addTextChangedListener(textoHaCambiado);
+
     }
 
 
