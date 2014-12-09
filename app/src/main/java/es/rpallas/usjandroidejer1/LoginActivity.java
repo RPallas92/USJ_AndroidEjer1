@@ -1,7 +1,9 @@
 package es.rpallas.usjandroidejer1;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,17 +29,23 @@ public class LoginActivity extends Activity {
         userText = (TextView) findViewById(R.id.loginUserText);
         passwordText = (TextView) findViewById(R.id.loginPasswordText);
 
+        leerCredenciales();
+
         enterButton = (Button) findViewById(R.id.loginEnterButton);
-        enterButton.setEnabled(false);
+        if(userText.getText().equals("") && passwordText.getText().equals("")){
+            enterButton.setEnabled(false);
+        }
+
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                almacenarCredenciales();
                 if (((userText.getText().toString()).equals(Ejercico1Application.USER)) && ((passwordText.getText().toString()).equals(Ejercico1Application.PASSWORD))){
                     Toast.makeText(LoginActivity.this, "Acceso correcto", Toast.LENGTH_SHORT).show();
-                    Intent lanzarCIFActivity = new Intent(LoginActivity.this, CIFActivity.class);
-                    lanzarCIFActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                    Intent lanzarPuntoLimpioActivity = new Intent(LoginActivity.this, PuntoLimpioActivity.class);
+                    lanzarPuntoLimpioActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                             Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(lanzarCIFActivity);
+                    startActivity(lanzarPuntoLimpioActivity);
                 } else {
                     Toast.makeText(LoginActivity.this, "Acceso incorrecto", Toast.LENGTH_SHORT).show();
                 }
@@ -64,6 +72,25 @@ public class LoginActivity extends Activity {
         userText.addTextChangedListener(textoHaCambiado);
         passwordText.addTextChangedListener(textoHaCambiado);
 
+    }
+    private void almacenarCredenciales(){
+        SharedPreferences prefs =
+                getSharedPreferences("MisPreferencias",Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("nombre", userText.getText().toString());
+        editor.putString("password", passwordText.getText().toString());
+        editor.commit();
+    }
+    private void leerCredenciales(){
+        SharedPreferences prefs =
+                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
+        String nombre = prefs.getString("nombre", "Usuario");
+        String password = prefs.getString("password", "******");
+
+        userText.setText(nombre);
+        passwordText.setText(password);
     }
 
 

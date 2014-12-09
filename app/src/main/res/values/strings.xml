@@ -8,5 +8,6 @@
     <string name="title_activity_datos_empresa">DatosEmpresaActivity</string>
     <string name="title_activity_deposito">DepositoActivity</string>
     <string name="title_activity_resultados">ResultadosActivity</string>
+    <string name="title_activity_punto_limpio">PuntoLimpioActivity</string>
 
 </resources>
