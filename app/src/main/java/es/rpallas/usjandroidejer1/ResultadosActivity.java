@@ -1,6 +1,9 @@
 package es.rpallas.usjandroidejer1;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,16 +11,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import es.rpallas.usjandroidejer1.model.PersonaJuridica;
 
 
-public class ResultadosActivity extends Activity {
+public class ResultadosActivity extends Activity implements DatePickerDialog.OnDateSetListener{
 
+    private TextView puntoLimpio;
     private TextView depositante;
     private TextView material;
     private TextView nevera;
@@ -27,6 +37,9 @@ public class ResultadosActivity extends Activity {
     private TextView ivaCoste;
     private TextView totalCoste;
     private TextView numeroResiduos;
+
+    private TextView resultadoFecha;
+    private Button editarFecha;
 
     private Button email;
     private Button registrar;
@@ -41,6 +54,7 @@ public class ResultadosActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados);
 
+        puntoLimpio = (TextView) findViewById(R.id.resultadosDepositoText);
         depositante = (TextView) findViewById(R.id.resultadoCIFText);
         material = (TextView) findViewById(R.id.resultadoMaterialInformaticoText);
         nevera = (TextView) findViewById(R.id.resultadoNeverasText);
@@ -55,6 +69,11 @@ public class ResultadosActivity extends Activity {
 
         email = (Button) findViewById(R.id.resultadoMailButton);
         registrar = (Button) findViewById(R.id.resultadoRegistrarButton);
+
+        editarFecha = (Button) findViewById(R.id.editarFecha);
+        resultadoFecha = (TextView) findViewById(R.id.resultadoFecha);
+
+        puntoLimpio.setText(Ejercico1Application.puntoLimpio);
 
         depositante.setText(Ejercico1Application.PERSONA.getId());
 
@@ -83,15 +102,28 @@ public class ResultadosActivity extends Activity {
             kilosCoste.setText(precioSinIVA+"€");
             ivaCoste.setText(IVA+"€");
             totalCoste.setText(precioTotal+"€");
+
+
+            editarFecha.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    DialogFragment newFragment = new DatePickerFragment();
+                    newFragment.show(getFragmentManager(), "datePicker");
+
+
+                }
+            });
         }
 
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent lanzarLoginActivity = new Intent(ResultadosActivity.this, LoginActivity.class);
-                lanzarLoginActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                Toast.makeText(ResultadosActivity.this, "Depósito registrado correctamente",Toast.LENGTH_SHORT).show();
+                Intent lanzarPuntoActivity = new Intent(ResultadosActivity.this, PuntoLimpioActivity.class);
+                lanzarPuntoActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
                         Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(lanzarLoginActivity);
+                startActivity(lanzarPuntoActivity);
             }
         });
         email.setOnClickListener(new View.OnClickListener() {
@@ -125,5 +157,26 @@ public class ResultadosActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static class DatePickerFragment extends DialogFragment
+             {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            return new DatePickerDialog(getActivity(),(DatePickerDialog.OnDateSetListener)getActivity(), year, month, day);
+        }
+
+
+    }
+
+    public void onDateSet(DatePicker view, int year, int month, int day) {
+
+        resultadoFecha.setText(day+"/"+month+"/"+year);
     }
 }
