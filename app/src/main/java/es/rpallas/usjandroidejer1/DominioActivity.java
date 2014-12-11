@@ -3,11 +3,19 @@ package es.rpallas.usjandroidejer1;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -30,7 +38,7 @@ import java.net.UnknownHostException;
 import es.rpallas.usjandroidejer1.model.PersonaJuridica;
 
 
-public class DominioActivity extends Activity {
+public class DominioActivity extends FragmentActivity {
 
     private EditText urlET;
     private TextView ipTV;
@@ -39,6 +47,9 @@ public class DominioActivity extends Activity {
     private TextView coordenadasTV;
 
     private double latitude, longitude = 0.0;
+
+    private GoogleMap mMap;
+
 
 
     static InputStream is = null;
@@ -83,6 +94,10 @@ public class DominioActivity extends Activity {
                     ip = jsonData.getString("ip");
                     localidad = jsonData.getString("city");
 
+                    if (mMap != null) {
+                        setUpMap();
+                    }
+
 
 
 
@@ -96,6 +111,32 @@ public class DominioActivity extends Activity {
                 coordenadasTV.setText(latitude+", "+longitude);
             }
         }.execute();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpMapIfNeeded();
+    }
+
+    private void setUpMapIfNeeded() {
+        if (mMap == null) {
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+
+        }
+    }
+
+    private void setUpMap() {
+        CameraUpdate center=
+                CameraUpdateFactory.newLatLng(new LatLng(latitude,
+                        longitude));
+        CameraUpdate zoom=CameraUpdateFactory.zoomTo(10);
+
+        mMap.moveCamera(center);
+        mMap.animateCamera(zoom);
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)));
     }
 
     private String getIpAddress(String url){
