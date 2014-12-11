@@ -23,6 +23,7 @@ public class Ejercico1Application extends Application {
     public static boolean isNeverasChecked = false;
     public static boolean isAceitesChecked = false;
     public static int kilos = 0;
+    public static String empresaURL = "";
     public static List<String> puntosLimpios = new ArrayList<String>();
     public static String puntoLimpio;
     public static String puntoLimpioImagenURL = "http://www.aulaclic.es/winxp/graficos/icono_papelera.gif";

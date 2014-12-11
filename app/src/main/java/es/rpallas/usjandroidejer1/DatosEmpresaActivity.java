@@ -157,13 +157,14 @@ public class DatosEmpresaActivity extends Activity {
     }
 
     private void configDominioButton() {
-        webButton.setOnClickListener(new View.OnClickListener() {
+        dominioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (Patterns.WEB_URL.matcher(urlEditText.getText().toString()).matches()) {
                     if (!urlEditText.getText().toString().startsWith("http://") && !urlEditText.getText().toString().startsWith("https://")) {
                         urlEditText.setText("http://" + urlEditText.getText().toString());
                     }
+                    Ejercico1Application.empresaURL = urlEditText.getText().toString();
                     Intent dominioIntent = new Intent(DatosEmpresaActivity.this, DominioActivity.class);
                     startActivity(dominioIntent);
                 } else {

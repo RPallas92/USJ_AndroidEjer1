@@ -6,11 +6,109 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="es.rpallas.usjandroidejer1.DominioActivity">
+    tools:context="es.rpallas.usjandroidejer1.DominioActivity"
+    android:id="@+id/layoutDominio">
 
     <TextView
-        android:text="@string/hello_world"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Datos dominio de la empresa"
+        android:id="@+id/dominioTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/dominioEditText"
+        android:layout_below="@+id/dominioTitle"
+        android:layout_alignParentStart="true"
+        android:enabled="false"
+        android:text="http://empresa.com" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Dirección de IP:"
+        android:id="@+id/dominioIPTitle"
+        android:layout_below="@+id/dominioEditText"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Desconocido"
+        android:id="@+id/dominioIP"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:layout_alignBottom="@+id/dominioIPTitle"
+        android:layout_toEndOf="@+id/dominioIPTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="País:"
+        android:id="@+id/dominioPaisTitle"
+        android:layout_below="@+id/dominioIPTitle"
+        android:layout_marginStart="10dp"
+        android:layout_alignEnd="@+id/dominioIPTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Desconocido"
+        android:id="@+id/dominioPais"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/dominioIP"
+        android:layout_toEndOf="@+id/dominioIPTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Localidad:"
+        android:id="@+id/textView"
+        android:layout_below="@+id/dominioPaisTitle"
+        android:layout_alignEnd="@+id/dominioPaisTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Desconocido"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:id="@+id/dominioLocalidad"
+        android:layout_below="@+id/dominioPaisTitle"
+        android:layout_toEndOf="@+id/dominioPaisTitle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Coordenadas:"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Desconocido"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:id="@+id/dominioCoordenadas"
+        android:layout_below="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
+
 
 </RelativeLayout>
