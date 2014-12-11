@@ -10,8 +10,10 @@ import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.regex.Pattern;
@@ -22,6 +24,7 @@ import es.rpallas.usjandroidejer1.model.PersonaJuridica;
 public class DatosEmpresaActivity extends Activity {
 
 
+    private Spinner areaSpinner;
     private EditText cifEditText;
     private EditText nombreEditText;
     private EditText telefonoEditText;
@@ -31,6 +34,7 @@ public class DatosEmpresaActivity extends Activity {
     private Button llamarButton;
     private Button emailButton;
     private Button webButton;
+    private Button dominioButton;
     private Button siguienteButton;
 
 
@@ -39,7 +43,7 @@ public class DatosEmpresaActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_empresa);
 
-
+        areaSpinner = (Spinner) findViewById(R.id.datosSpinner);
         cifEditText = (EditText) findViewById(R.id.datosCIFEditText);
         nombreEditText = (EditText) findViewById(R.id.datosNombreEditText);
         telefonoEditText = (EditText) findViewById(R.id.datosTelEditText);
@@ -49,10 +53,12 @@ public class DatosEmpresaActivity extends Activity {
         llamarButton = (Button) findViewById(R.id.datosLlamarButton);
         emailButton = (Button) findViewById(R.id.datosEmailButton);
         webButton = (Button) findViewById(R.id.datosWebButton);
+        dominioButton = (Button) findViewById(R.id.datosDominioButton);
 
         llamarButton.setEnabled(false);
         emailButton.setEnabled(false);
         webButton.setEnabled(false);
+        dominioButton.setEnabled(false);
 
         siguienteButton = (Button) findViewById(R.id.depositoMaterialImage);
         siguienteButton.setEnabled(false);
@@ -81,6 +87,7 @@ public class DatosEmpresaActivity extends Activity {
 
                 } else if (urlEditText.getText().hashCode() == s.hashCode()) {
                     activarBotonSiRellenado(webButton, urlEditText);
+                    activarBotonSiRellenado(dominioButton, urlEditText);
 
                 } else if (nombreEditText.getText().hashCode() == s.hashCode()){
                     activarBotonSiRellenado(null, nombreEditText);
@@ -97,6 +104,7 @@ public class DatosEmpresaActivity extends Activity {
         configLlamarButton();
         configEmailButton();
         configWebButton();
+        configDominioButton();
 
         configSiguienteButton();
     }
@@ -148,6 +156,23 @@ public class DatosEmpresaActivity extends Activity {
         });
     }
 
+    private void configDominioButton() {
+        webButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Patterns.WEB_URL.matcher(urlEditText.getText().toString()).matches()) {
+                    if (!urlEditText.getText().toString().startsWith("http://") && !urlEditText.getText().toString().startsWith("https://")) {
+                        urlEditText.setText("http://" + urlEditText.getText().toString());
+                    }
+                    Intent dominioIntent = new Intent(DatosEmpresaActivity.this, DominioActivity.class);
+                    startActivity(dominioIntent);
+                } else {
+                    Toast.makeText(DatosEmpresaActivity.this, "URL incorrecta", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
     private void configSiguienteButton(){
 
         siguienteButton.setOnClickListener(new View.OnClickListener() {
@@ -163,6 +188,7 @@ public class DatosEmpresaActivity extends Activity {
                         empresa.setNombre(nombreEditText.getText().toString());
                         empresa.setTelefono(telefonoEditText.getText().toString());
                         empresa.setWeb(urlEditText.getText().toString());
+                        empresa.setArea(areaSpinner.getSelectedItem().toString());
                     }
                     Intent lanzarDepositoActivity = new Intent(DatosEmpresaActivity.this, DepositoActivity.class);
                     startActivity(lanzarDepositoActivity);
@@ -215,6 +241,7 @@ public class DatosEmpresaActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Ejercico1Application.showLogoutDialog(this);
             return true;
         }
         return super.onOptionsItemSelected(item);

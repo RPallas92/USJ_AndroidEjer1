@@ -3,11 +3,22 @@
 
     <string name="app_name">USJAndroidEjer1</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Desconectar</string>
     <string name="title_activity_cif">CIFActivity</string>
     <string name="title_activity_datos_empresa">DatosEmpresaActivity</string>
     <string name="title_activity_deposito">DepositoActivity</string>
     <string name="title_activity_resultados">ResultadosActivity</string>
     <string name="title_activity_punto_limpio">PuntoLimpioActivity</string>
+
+    <string-array name="area_empresa">
+        <item>Automoción</item>
+        <item>Informática</item>
+        <item>Mecánica</item>
+        <item>Telecomunicaciones</item>
+        <item>Saneamiento</item>
+        <item>Construcción</item>
+    </string-array>
+
+    <string name="title_activity_dominio">DominioActivity</string>
 
 </resources>

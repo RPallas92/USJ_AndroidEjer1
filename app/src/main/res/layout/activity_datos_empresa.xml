@@ -19,12 +19,20 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/datosSpinner"
+        android:layout_below="@+id/depositoPesoText"
+        android:drawSelectorOnTop="true"
+        android:entries="@array/area_empresa"></Spinner>
+
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/datosCIFEditText"
         android:hint="CIF"
-        android:layout_below="@+id/depositoPesoText"
+        android:layout_below="@+id/datosSpinner"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -95,6 +103,13 @@
         android:layout_toEndOf="@+id/datosTelEditText"
         android:layout_below="@+id/datosEmailButton"
         android:layout_alignStart="@+id/datosEmailButton" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver información dominio"
+        android:id="@+id/datosDominioButton"
+        android:layout_below="@+id/datosWebButton" />
 
     <Button
         android:layout_width="match_parent"

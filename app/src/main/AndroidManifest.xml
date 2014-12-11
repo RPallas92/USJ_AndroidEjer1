@@ -3,9 +3,10 @@
     package="es.rpallas.usjandroidejer1" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
-        android:allowBackup="true"
         android:name=".Ejercico1Application"
+        android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
@@ -37,6 +38,10 @@
         <activity
             android:name=".PuntoLimpioActivity"
             android:label="@string/title_activity_punto_limpio" >
+        </activity>
+        <activity
+            android:name=".DominioActivity"
+            android:label="@string/title_activity_dominio" >
         </activity>
     </application>
 

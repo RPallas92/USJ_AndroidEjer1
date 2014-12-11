@@ -1,6 +1,10 @@
 package es.rpallas.usjandroidejer1;
 
+import android.app.AlertDialog;
 import android.app.Application;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,5 +37,25 @@ public class Ejercico1Application extends Application {
 
         puntoLimpio = puntosLimpios.get(0);
 
+    }
+
+    public static void showLogoutDialog(final Context context) {
+        final DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        Intent lanzarLoginActivity = new Intent(context, LoginActivity.class);
+                        lanzarLoginActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        context.startActivity(lanzarLoginActivity);
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("¿Seguro qué desea desconectarse de la aplicación?").setPositiveButton("Sí", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
     }
 }

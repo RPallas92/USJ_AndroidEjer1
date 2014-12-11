@@ -10,6 +10,9 @@ public class PersonaJuridica extends Persona {
     private String email;
     private String web;
 
+
+    private String area;
+
     public PersonaJuridica(String id) {
         super(id);
     }
@@ -44,6 +47,14 @@ public class PersonaJuridica extends Persona {
 
     public void setWeb(String web) {
         this.web = web;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 
 
